@@ -1,2 +1,2 @@
-project_id = "cloudkite-interviews-ajibola"
+project_id = "Nodejs-app-GKE"
 region     = "us-central1"
