@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cloud-ingress
+  annotations:
+    networking.gke.io/managed-certificates: cloudkitty-cert
+spec:
+  rules:
+  - host: cloudkittyapp.cf
+    http:
+      paths:
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: cloudkite-deploy
+            port:
+              number: 80
+      - path: /vowel-service
+        pathType: Prefix
+        backend:
+          service:
+            name: cloudkite-deploy
+            port:
+              number: 80

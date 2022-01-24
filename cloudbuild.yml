@@ -1,0 +1,19 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/cloudkite-image', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/cloudkite-image']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'cloudkite-image-00001-maz', '--image', 'gcr.io/$PROJECT_ID/cloudkite-image', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+# deploy container image to GKE
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=k8s/
+  - --image=gcr.io/cloudkite-interviews-ajibola/cloudkite-image:latest
+  - --location=us-central1
+  - --cluster=cloudkite-interviews-ajibola-gke
