@@ -1,0 +1,4 @@
+deployment:
+  image: ""
+  tag: ""
+name: nodejs-app-01

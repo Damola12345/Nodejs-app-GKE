@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudkite-deploy
+  labels:
+    app: cloudkite-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloudkite-app
+  template:
+    metadata:
+      labels:
+        app: cloudkite-app
+    spec:
+      containers:
+      - name: cloudkite
+        image: gcr.io/cloudkite-interviews-ajibola/cloudkite-image
+        ports:
+        - containerPort: 8080 
