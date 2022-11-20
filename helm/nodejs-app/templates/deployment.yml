@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloudkite-deploy
+  name: "{{ .Values.name }}"
   labels:
-    app: cloudkite-app
+    app: "{{ .Values.selector }}"
 spec:
-  replicas: 2
+  replicas: "{{ .Values.replica }}"
   selector:
     matchLabels:
-      app: cloudkite-app
+      app: "{{ .Values.selector }}"
   template:
     metadata:
       labels:
-        app: cloudkite-app
+        app: "{{ .Values.selector }}"
     spec:
       containers:
-      - name: cloudkite
-        image: gcr.io/cloudkite-interviews-ajibola/cloudkite-image
+      - name: "{{ .Values.name }}"
+        image: {{ .Values.deployment.image }}:{{ .Values.deployment.tag }}
         ports:
-        - containerPort: 8080 
+        - containerPort: "{{ .Values.containersportNumber }}"

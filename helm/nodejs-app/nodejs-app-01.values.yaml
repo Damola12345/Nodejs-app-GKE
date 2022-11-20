@@ -1,4 +1,12 @@
 deployment:
-  image: ""
-  tag: ""
+  image: "damola12345/nodejs-app-gke"
+  tag: "latest"
 name: nodejs-app-01
+
+selector: nodejs-gke
+
+replicas: 2
+
+containersportNumber: 8080
+
+ingress: nodejs-ingress
